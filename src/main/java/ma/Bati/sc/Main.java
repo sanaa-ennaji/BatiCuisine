@@ -9,7 +9,12 @@ public class Main {
         DatabaseConnection dbConnection = DatabaseConnection.getInstance();
         try(Connection connection = dbConnection.getConnection())
         {
-            System.out.println("setnence croisee!");
+            if(connection != null){
+                System.out.println("setnence croisee!");
+            }else{
+                System.out.println("failed");
+            }
+
         }catch(SQLException e){
             e.printStackTrace();
             System.out.println("failed to connect with database");
