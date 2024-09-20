@@ -1,4 +1,4 @@
-package main.java.ma.Bati.sc.Entities;
+package main.java.ma.Bati.sc.model;
 
 import java.util.UUID;
 
