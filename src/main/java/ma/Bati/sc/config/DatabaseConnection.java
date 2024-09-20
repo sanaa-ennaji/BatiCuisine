@@ -1,4 +1,4 @@
-package main.java.ma.Bati.sc.utils;
+package main.java.ma.Bati.sc.config;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

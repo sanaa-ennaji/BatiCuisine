@@ -1,6 +1,6 @@
 package main.java.ma.Bati.sc;
 
-import main.java.ma.Bati.sc.utils.DatabaseConnection;
+import main.java.ma.Bati.sc.config.DatabaseConnection;
 
 import java.sql.Connection;
 import  java.sql.SQLException;
