@@ -1,6 +1,6 @@
 package main.java.ma.Bati.sc.Enums;
 
-public enum EtatProjet {
+public enum ProjectState {
     IN_PROGRESS,
     CANCELED,
     COMPLETED
