@@ -10,8 +10,12 @@ public class Material extends Component {
     private double qualityCoefficient;
 
 
-    public Material (UUID id ,String name , double VATRate, Project project , double quantity , double unitCost, double qualityCoefficient){
+    public Material (UUID id ,String name , double VATRate, Project project , double quantity , double unitCost,double transportCost,  double qualityCoefficient){
         super(id , name , VATRate, project);
+        this.setQuantity(quantity);
+        this.setUniCost(unitCost);
+        this.setTransportCost(transportCost);
+        this.setQualityCoefficient(qualityCoefficient);
 
 
     }
