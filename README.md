@@ -1,7 +1,5 @@
 # BatiCuisine
 
-# BatiCuisine Project
-
 ## Overview
 BatiCuisine is a Java-based application designed to manage projects, clients, estimates, and related components in the construction domain. The application is structured in layers, following best practices and utilizing various Java features and design patterns.
 
