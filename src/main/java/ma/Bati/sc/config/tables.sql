@@ -19,6 +19,7 @@ CREATE TABLE projects (
                           id UUID  PRIMARY KEY DEFAULT gen_random_uuid(),
                           projectName VARCHAR(50) NOT NULL ,
                           profitMargin DOUBLE PRECISION,
+                          totalCost  DOUBLE PRECISION,
                           projectState project_state_enum  DEFAULT 'IN_PROGRESS',
                           client_id UUID REFERENCES   clients(id) ON DELETE CASCADE
 
