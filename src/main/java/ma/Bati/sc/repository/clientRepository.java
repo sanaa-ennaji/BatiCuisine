@@ -1,4 +1,8 @@
 package main.java.ma.Bati.sc.repository;
 
 public class clientRepository {
+
+    public  clientRepository(){
+
+    }
 }

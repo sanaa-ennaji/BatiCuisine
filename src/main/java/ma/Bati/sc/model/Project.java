@@ -38,6 +38,36 @@ public class Project {
         return projectName;
     }
     public double getProfitMargin(){
-        return
+        return profitMargin ;
     }
+    public double getTotalCost(){
+        return totalCost;
+    }
+    public ProjectState getProjectState(){
+        return projectState;
+    }
+   public Client getClient (){
+        return client ;
+   }
+    public void setId (UUID id){
+        this.id = id ;
+
+    }
+    public void setProfitMargin(double profitMargin){
+        this.profitMargin = profitMargin;
+    }
+    public void setProjectState(ProjectState projectState){
+        this.projectState = projectState ;
+    }
+
+    public void setTotalCost(double totalCost) {
+        this.totalCost = totalCost;
+    }
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+    public void setClient (Client client){
+        this.client = client ;
+    }
+
 }

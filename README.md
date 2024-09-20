@@ -32,7 +32,8 @@ BatiCuisine is a Java-based application designed to manage projects, clients, es
 
 2. **Database Configuration:**:
 
-- Update your PostgreSQL connection settings in the DatabaseConfig.java file to match your local database credentials.
+- Update your PostgreSQL connection settings in the DatabaseConnection.java file to match your local database credentials.
+- run the sql script in the tables.sql file in pgadmin .
 
 3. **Database Configuration:**:
    ```bash
@@ -40,7 +41,7 @@ BatiCuisine is a Java-based application designed to manage projects, clients, es
 
 4. **Run the Application**:
    ```bash
-   java -cp bin com.Bati.Main
+   java -cp bin ma.Bati.Main
 
 
   
