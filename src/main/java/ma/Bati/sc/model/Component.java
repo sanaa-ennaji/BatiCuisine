@@ -2,7 +2,7 @@ package main.java.ma.Bati.sc.model;
 
 import java.util.UUID;
 
-public class Component {
+public  abstract  class  Component {
 
 private UUID id;
 private String name ;

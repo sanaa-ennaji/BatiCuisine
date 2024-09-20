@@ -33,7 +33,6 @@ CREATE TABLE components(
 );
 
 CREATE TABLE material (
-                          id UUID PRIMARY KEY DEFAULT  gen_random_uuid(),
                           quantity DOUBLE PRECISION,
                           unitCost DOUBLE PRECISION,
                           transportCost DOUBLE PRECISION,
@@ -41,7 +40,6 @@ CREATE TABLE material (
 )INHERITS(components);
 
 CREATE TABLE  labor (
-                        id  UUID PRIMARY KEY  DEFAULT  gen_random_uuid(),
                         hourlyRate DOUBLE PRECISION,
                         workHours DOUBLE PRECISION,
                         workEfficiency DOUBLE PRECISION
