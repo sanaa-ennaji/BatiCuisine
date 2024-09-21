@@ -5,7 +5,9 @@ import main.java.ma.Bati.sc.exception.DatabaseException;
 import main.java.ma.Bati.sc.model.Client;
 import main.java.ma.Bati.sc.repository.Interfaces.IClientRepository;
 
+import javax.swing.*;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -32,11 +34,22 @@ public class clientRepository implements IClientRepository {
         } catch (SQLException e) {
             throw new DatabaseException("Error saving the client", e);
         }
-        return null;
+        return client;
     }
 
     @Override
     public List<Client> getAll() {
+        List<Client> clients = new ArrayList<>();
+        String query = "SELECT * FROM clients";
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(query)){
+          while (rs.next()){
+              Client client = mapResultSetToClient(rs);
+              clients.add(client);
+          }
+        } catch (SQLException e) {
+            throw new DatabaseException("Error fetching clients", e);
+        }
         return List.of();
     }
 
