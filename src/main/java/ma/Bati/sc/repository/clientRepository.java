@@ -1,6 +1,7 @@
 package main.java.ma.Bati.sc.repository;
 
 import main.java.ma.Bati.sc.config.DatabaseConnection;
+import main.java.ma.Bati.sc.exception.DatabaseException;
 import main.java.ma.Bati.sc.model.Client;
 import main.java.ma.Bati.sc.repository.Interfaces.IClientRepository;
 
@@ -29,7 +30,7 @@ public class clientRepository implements IClientRepository {
 
 
         } catch (SQLException e) {
-            throw new  D
+            throw new DatabaseException("Error saving the client", e);
         }
         return null;
     }
