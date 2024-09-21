@@ -2,9 +2,6 @@ CREATE DATABASE BatiCuisine ;
 
 \c BatiCuisine
 
-CREATE TYPE project_state_enum AS ENUM ('IN_PROGRESS', 'COMPLETED', 'CANCELED')
-
-
 CREATE TYPE project_state_enum AS ENUM ('IN_PROGRESS', 'COMPLETED', 'CANCELED');
 
 CREATE TABLE clients(

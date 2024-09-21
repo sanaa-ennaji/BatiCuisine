@@ -12,8 +12,8 @@ public class Client {
    public Client (){
 
    }
-   public Client (UUID id, String name, String address, String phone, boolean isProfessional){
-       this.setId(id);
+   public Client (String name, String address, String phone, boolean isProfessional){
+       this.id = UUID.randomUUID();
        this.setName(name);
        this.setAddress(address);
        this.setPhone(phone);
