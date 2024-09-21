@@ -68,4 +68,13 @@ public class clientRepository implements IClientRepository {
     public void delete(UUID id) {
 
     }
+
+    private Client mapResultSetToClient(ResultSet rs) throws SQLException{
+        UUID id = UUID.fromString(rs.getString("id"));
+        String name = rs.getString("name");
+        String address = rs.getString("address");
+        String phone = rs.getString("phone");
+        boolean isProfessional = rs.getBoolean("isProfessional");
+        return new Client(id, name, address, phone, isProfessional);
+    }
 }
