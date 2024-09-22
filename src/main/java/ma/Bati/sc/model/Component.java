@@ -4,10 +4,10 @@ import java.util.UUID;
 
 public  abstract  class  Component {
 
-private UUID id;
-private String name ;
-private double VATRate ;
-private Project project;
+protected UUID id;
+protected String name ;
+protected double VATRate ;
+protected Project project;
 
 
 public Component (UUID id, String name, double VATRate, Project project){

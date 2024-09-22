@@ -15,12 +15,12 @@ public void  Menu () throws SQLException{
     while(true){
         System.out.println("=========================Welcome to the kitchen renovation project management application============================");
         System.out.println("||==========principal Menu==========||");
-        System.out.println("||add a new client                  ||");
-        System.out.println("||create a new project              ||");
-        System.out.println("||view existing projects            ||");
-        System.out.println("||calculate the cost of projects    ||");
-        System.out.println("||==================================||");
-
+        System.out.println("||1 - add a new client                  ||");
+        System.out.println("||2 - create a new project              ||");
+        System.out.println("||3 - view existing projects            ||");
+        System.out.println("||4 - calculate the cost of projects    ||");
+        System.out.println("||======================================||");
+        System.out.print("enter your choice :");
      int choice = scanner.nextInt();
      scanner.nextLine();
 
@@ -31,7 +31,7 @@ public void  Menu () throws SQLException{
              break;
 
          default:
-             System.out.println("incalid option");
+             System.out.println("invalid choice");
              Menu();
 
      }
