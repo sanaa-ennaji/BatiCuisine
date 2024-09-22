@@ -24,9 +24,6 @@ public class clientService  implements IClientService{
         if(client.getAddress() == null || client.getAddress().trim().isEmpty()){
             throw new IllegalArgumentException("client addres is empty ");
         }
-//        if (!client.getPhone().matches("\\+?[0-9.-]+")) {
-//            throw new IllegalArgumentException("invalid phone number");
-//        }
         return clientRepository.save(client);
     }
 
