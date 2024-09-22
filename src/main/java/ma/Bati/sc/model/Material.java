@@ -29,7 +29,7 @@ public class Material extends Component {
         this.quantity = quantity;
     }
 
-    public double getUniCost() {
+    public double getUnitCost() {
         return uniCost;
     }
 

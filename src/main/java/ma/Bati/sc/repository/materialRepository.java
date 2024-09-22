@@ -5,6 +5,7 @@ import main.java.ma.Bati.sc.model.Material;
 import main.java.ma.Bati.sc.repository.Interfaces.IMaterialRepository;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -19,7 +20,19 @@ public class materialRepository implements IMaterialRepository {
 
     @Override
     public Material save(Material material) throws SQLException {
-        return null;
+
+        String sql = "INSERT INTO material (id, name, quantity, unitCost, transportCost, qualityCoefficient, project_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setObject(1, material.getId());
+            stmt.setString(2, material.getName());
+            stmt.setDouble(3, material.getQuantity());
+            stmt.setDouble(4, material.getUnitCost());
+            stmt.setDouble(5, material.getTransportCost());
+            stmt.setDouble(6, material.getQualityCoefficient());
+            stmt.setObject(7, material.getProject().getId());
+            stmt.executeUpdate();
+        }
+        return material;
     }
 
     @Override
