@@ -19,23 +19,27 @@ public class clientService  implements IClientService{
     @Override
     public Client create(Client client) {
         if (client.getName() == null || client.getName().trim().isEmpty()){
-            throw new RuntimeException();
+            throw new IllegalArgumentException("client name is empty ");
+        }
+        if(client.getAddress() == null || client.getAddress().trim().isEmpty()){
+            throw new IllegalArgumentException("client addres is empty ");
         }
         return clientRepository.save(client);
     }
 
+
     @Override
     public List<Client> getAll() {
-        return List.of();
+        return clientRepository.getAll();
     }
 
     @Override
     public Optional<Client> findById(UUID id) {
-        return Optional.empty();
+        return clientRepository.getById(id);
     }
 
     @Override
     public void delete(UUID id) {
-
+     clientRepository.delete(id);
     }
 }

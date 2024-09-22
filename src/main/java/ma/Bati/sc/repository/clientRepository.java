@@ -26,7 +26,7 @@ public class clientRepository implements IClientRepository {
             prst.setObject(1, client.getId());
             prst.setString(1, client.getName());
             prst.setString(2,client.getAddress());
-            prst.setString(3, client.setPhone());
+            prst.setString(3, client.getPhone());
             prst.setBoolean(4, client.getIsProfessional());
 
 
