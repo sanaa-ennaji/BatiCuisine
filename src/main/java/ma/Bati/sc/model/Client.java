@@ -45,7 +45,7 @@ public class Client {
    public String getAddress(){
        return address ;
    }
-   public String setPhone (){
+   public String getPhone (){
        return phone ;
    }
    public boolean getIsProfessional (){

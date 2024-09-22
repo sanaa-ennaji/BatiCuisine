@@ -24,21 +24,24 @@ public class clientService  implements IClientService{
         if(client.getAddress() == null || client.getAddress().trim().isEmpty()){
             throw new IllegalArgumentException("client addres is empty ");
         }
+//        if (!client.getPhone().matches("\\+?[0-9.-]+")) {
+//            throw new IllegalArgumentException("invalid phone number");
+//        }
         return clientRepository.save(client);
     }
 
     @Override
     public List<Client> getAll() {
-        return List.of();
+        return clientRepository.getAll();
     }
 
     @Override
     public Optional<Client> findById(UUID id) {
-        return Optional.empty();
+        return clientRepository.getById(id);
     }
 
     @Override
     public void delete(UUID id) {
-
+     clientRepository.delete(id);
     }
 }
