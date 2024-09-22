@@ -30,6 +30,7 @@ private final Connection connection;
                 stmt.setObject(5, project.getClient().getId());
                 stmt.executeUpdate();
             }
+            return project;
         }
 
 
