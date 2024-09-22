@@ -5,7 +5,6 @@ import main.java.ma.Bati.sc.exception.DatabaseException;
 import main.java.ma.Bati.sc.model.Client;
 import main.java.ma.Bati.sc.repository.Interfaces.IClientRepository;
 
-import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
