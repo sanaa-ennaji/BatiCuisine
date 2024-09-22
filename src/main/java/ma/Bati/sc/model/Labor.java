@@ -11,7 +11,7 @@ public class Labor extends Component  {
     public Labor(UUID id, String name, double VATRate, Project project, double hourlyRate, double WorkHours , double workEfficiency) {
         super(id, name, VATRate, project);
         this.setHourlyRate(hourlyRate);
-        this.setWorkHours(workHours);
+        this.setWorkHours(WorkHours);
         this.setWorkEfficiency(workEfficiency);
 
     }
