@@ -11,7 +11,9 @@ public class Project {
     private double profitMargin ;
     private double totalCost ;
     private ProjectState projectState ;
+    private double surface ;
     private  Client client ;
+
     List<Component> components ;
     List<Estimate> estimates ;
 
@@ -20,12 +22,13 @@ public class Project {
 
     }
 
-    public Project (UUID id, String projectName, double profitMargin, double totalCost , ProjectState projectState, Client client){
+    public Project (UUID id, String projectName, double profitMargin, double totalCost , ProjectState projectState,double surface, Client client){
        this.setId(id) ;
        this.setProjectName(projectName);
        this.setProfitMargin(profitMargin);
        this.setTotalCost(totalCost);
        this.setProjectState(projectState);
+       this.setSurface(surface);
        this.setClient(client);
 
 
@@ -53,6 +56,15 @@ public class Project {
         this.id = id ;
 
     }
+
+    public double getSurface() {
+        return surface;
+    }
+
+    public void setSurface(double surface) {
+        this.surface = surface;
+    }
+
     public void setProfitMargin(double profitMargin){
         this.profitMargin = profitMargin;
     }
