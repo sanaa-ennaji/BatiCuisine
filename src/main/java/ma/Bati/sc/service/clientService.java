@@ -19,7 +19,10 @@ public class clientService  implements IClientService{
     @Override
     public Client create(Client client) {
         if (client.getName() == null || client.getName().trim().isEmpty()){
-            throw new RuntimeException();
+            throw new IllegalArgumentException("client name is empty ");
+        }
+        if(client.getAddress() == null || client.getAddress().trim().isEmpty()){
+            throw new IllegalArgumentException("client addres is empty ");
         }
         return clientRepository.save(client);
     }
