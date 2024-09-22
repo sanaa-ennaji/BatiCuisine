@@ -14,3 +14,4 @@ public interface IClientRepository {
     void delete (UUID id);
 
 }
+

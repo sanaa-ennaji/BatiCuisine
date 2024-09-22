@@ -1,5 +1,6 @@
 package main.java.ma.Bati.sc;
 
+import main.java.ma.Bati.sc.UI.PrincipalMenu;
 import main.java.ma.Bati.sc.config.DatabaseConnection;
 
 import java.sql.Connection;
@@ -11,6 +12,8 @@ public class Main {
         {
             if(connection != null){
                 System.out.println("setnence croisee!");
+                PrincipalMenu principalMenu = new PrincipalMenu();
+                principalMenu.Menu();
             }else{
                 System.out.println("failed");
             }
