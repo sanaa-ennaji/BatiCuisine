@@ -66,6 +66,13 @@ public class clientRepository implements IClientRepository {
 
     @Override
     public void delete(UUID id) {
+        String query = "DELETE FROM clients WHERE id = ?";
+        try (PreparedStatement pstmt = connection.prepareStatement(query)){
+            pstmt.setObject(1, id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new DatabaseException("error deleting cleint", e);
+        }
 
     }
 
@@ -75,6 +82,6 @@ public class clientRepository implements IClientRepository {
         String address = rs.getString("address");
         String phone = rs.getString("phone");
         boolean isProfessional = rs.getBoolean("isProfessional");
-        return new Client(id, name, address, phone, isProfessional);
+        return new Client(name, address, phone, isProfessional);
     }
 }
