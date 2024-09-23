@@ -29,7 +29,7 @@ public class projectService implements IProjectService {
 
 
     @Override
-    public Project create(String projectName, double surface, Client client) {
+    public Project create(String projectName, double surface, Optional<Client> client) {
         UUID projectId = UUID.randomUUID();
         Project project = new Project();
         project.setId(UUID.randomUUID());

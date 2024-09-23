@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public interface IProjectService
 {
-    Project create(String projectName, double surface, Client client);
+    Project create(String projectName, double surface, Optional<Client> client);
     void save (Project project) throws SQLException;
     double calculateTotalCost(Project project, Optional<Double> VATRate, Optional<Double> profitMargin);
     List<Client> getAll ();
