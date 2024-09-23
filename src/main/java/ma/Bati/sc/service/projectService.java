@@ -48,13 +48,13 @@ public class projectService implements IProjectService {
         projectRepository.save(project);
         project.getMaterials().forEach(material -> {
             try {
-                materialRepository.saveMaterial(material, project.getId());
+                materialRepository.save(material, project.getId());
             } catch (SQLException e) {        e.printStackTrace();
             }
         });
         project.getLabors().forEach(labor -> {
             try {
-                laborRepository.saveLabor(labor, project.getId());
+                laborRepository.save(labor, project.getId());
             } catch (SQLException e) {
                 e.printStackTrace();
             }

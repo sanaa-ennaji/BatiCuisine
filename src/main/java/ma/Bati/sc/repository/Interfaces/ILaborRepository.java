@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface ILaborRepository {
-    Labor save (Labor labor) throws SQLException;
+    Labor save (Labor labor, UUID id) throws SQLException;
     List<Labor> getAll();
     Optional<Labor> getById(UUID id);
 }
