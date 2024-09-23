@@ -25,7 +25,9 @@ public class projectService implements IProjectService {
 
 
     @Override
-    public Project create(Client client) {
+    public Project create(String projectName, double surface, UUID clientId) {
+        UUID projectId = UUID.randomUUID();
+        Project project = new Project(projectId, projectName, )
         return null;
     }
 

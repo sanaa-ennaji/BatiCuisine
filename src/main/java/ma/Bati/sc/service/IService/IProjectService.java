@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public interface IProjectService
 {
-    Project create(Client client);
+    Project create(String projectName, double surface, UUID clientId);
     List<Client> getAll ();
     Optional<Client> findById (UUID id);
     void delete (UUID id);
