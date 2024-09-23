@@ -1,6 +1,7 @@
 package main.java.ma.Bati.sc.UI;
 
 import main.java.ma.Bati.sc.model.Client;
+import main.java.ma.Bati.sc.model.Material;
 import main.java.ma.Bati.sc.model.Project;
 import main.java.ma.Bati.sc.service.IService.IClientService;
 import main.java.ma.Bati.sc.service.IService.IProjectService;
@@ -51,6 +52,36 @@ public class ProjectUI {
         }
     }
 
+    private void addMaterials(Project project) {
+        boolean addMoreMaterials = true;
+        while (addMoreMaterials) {
+            System.out.println("--- Ajout des matériaux ---");
+            System.out.print("Entrez le nom du matériau : ");
+            String materialName = scanner.nextLine();
+
+            System.out.print("Entrez la quantité de ce matériau (en m² ou litres) : ");
+            double quantity = Double.parseDouble(scanner.nextLine());
+
+            System.out.print("Entrez le coût unitaire de ce matériau (€) : ");
+            double unitCost = Double.parseDouble(scanner.nextLine());
+
+            System.out.print("Entrez le coût de transport de ce matériau (€) : ");
+            double transportCost = Double.parseDouble(scanner.nextLine());
+
+            System.out.print("Entrez le coefficient de qualité du matériau (1.0 = standard, > 1.0 = haute qualité) : ");
+            double qualityCoefficient = Double.parseDouble(scanner.nextLine());
+
+
+            Material material = new Material(name, quantity, unitCost, transportCost, qualityCoefficient, project_id);
+            project.addMaterial(material);
+
+            System.out.println("Matériau ajouté avec succès !");
+
+            System.out.print("Voulez-vous ajouter un autre matériau ? (y/n) : ");
+            addMoreMaterials = scanner.nextLine().equalsIgnoreCase("y");
+        }
+    }
+    }
 
 
 

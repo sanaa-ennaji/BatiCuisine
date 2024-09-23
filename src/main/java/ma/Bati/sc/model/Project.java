@@ -2,7 +2,9 @@ package main.java.ma.Bati.sc.model;
 
 import main.java.ma.Bati.sc.Enums.ProjectState;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public class Project {
@@ -12,7 +14,7 @@ public class Project {
     private double totalCost ;
     private ProjectState projectState ;
     private double surface ;
-    private  Client client ;
+    private Optional<Client> client ;
     List<Component> components ;
     List<Estimate> estimates ;
     private List<Material> materials;
@@ -30,9 +32,9 @@ public class Project {
        this.setTotalCost(totalCost);
        this.setProjectState(projectState);
        this.setSurface(surface);
-       this.setClient(client);
-        this.materials = materials;
-        this.labors = labors;
+       this.setClient(Optional.ofNullable(client));
+        this.materials = new ArrayList<>();
+        this.labors = new ArrayList<>();
 
 
     }
@@ -53,7 +55,7 @@ public class Project {
     public ProjectState getProjectState(){
         return projectState;
     }
-   public Client getClient (){
+   public Optional<Client> getClient (){
         return client ;
    }
     public void setId (UUID id){
@@ -82,7 +84,7 @@ public class Project {
     public void setProjectName(String projectName) {
         this.projectName = projectName;
     }
-    public void setClient (Client client){
+    public void setClient (Optional<Client> client){
         this.client = client ;
     }
     public void setMaterials(List<Material> materials) {
@@ -99,6 +101,7 @@ public class Project {
     public List<Labor> getLabors() {
         return labors;
     }
+
 
 
 }
