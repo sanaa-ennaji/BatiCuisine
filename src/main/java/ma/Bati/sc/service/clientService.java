@@ -15,7 +15,6 @@ public class clientService  implements IClientService{
         this.clientRepository = clientRepository;
     }
 
-
     @Override
     public Client create(Client client) {
         if (client.getName() == null || client.getName().trim().isEmpty()){

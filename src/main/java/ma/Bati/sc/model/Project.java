@@ -13,16 +13,17 @@ public class Project {
     private ProjectState projectState ;
     private double surface ;
     private  Client client ;
-
     List<Component> components ;
     List<Estimate> estimates ;
+    private List<Material> materials;
+    private List<Labor> labors;
 
 
     public Project (){
 
     }
 
-    public Project (UUID id, String projectName, double profitMargin, double totalCost , ProjectState projectState,double surface, Client client){
+    public Project (UUID id, String projectName, double profitMargin, double totalCost , ProjectState projectState,double surface, Client client, List<Material> materials, List<Labor> labors){
        this.setId(id) ;
        this.setProjectName(projectName);
        this.setProfitMargin(profitMargin);
@@ -30,9 +31,12 @@ public class Project {
        this.setProjectState(projectState);
        this.setSurface(surface);
        this.setClient(client);
+        this.materials = materials;
+        this.labors = labors;
 
 
     }
+
 
     public UUID getId(){
         return id;
@@ -81,5 +85,14 @@ public class Project {
     public void setClient (Client client){
         this.client = client ;
     }
+    public void setMaterials(List<Material> materials) {
+        this.materials = materials;
+    }
+
+    public void setLabors(List<Labor> labors) {
+        this.labors = labors;
+    }
+
+
 
 }
