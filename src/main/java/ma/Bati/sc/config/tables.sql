@@ -18,10 +18,11 @@ CREATE TABLE projects (
                           profitMargin DOUBLE PRECISION,
                           totalCost  DOUBLE PRECISION,
                           projectState project_state_enum  DEFAULT 'IN_PROGRESS',
+                          surface DOUBLE PRECISION,
                           client_id UUID REFERENCES   clients(id) ON DELETE CASCADE
 
 );
-
+// heritage decrease la contite a ecrire
 CREATE TABLE components(
                            id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
                            name VARCHAR(50) NOT NULL ,

@@ -13,7 +13,6 @@ public class Project {
     private ProjectState projectState ;
     private double surface ;
     private  Client client ;
-
     List<Component> components ;
     List<Estimate> estimates ;
 

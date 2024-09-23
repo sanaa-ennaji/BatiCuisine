@@ -27,7 +27,8 @@ private final Connection connection;
                 stmt.setString(2, project.getProjectName());
                 stmt.setDouble(3, project.getProfitMargin());
                 stmt.setString(4, project.getProjectState().name());
-                stmt.setObject(5, project.getClient().getId());
+                stmt.setDouble(5, project.getSurface());
+                stmt.setObject(6, project.getClient().getId());
                 stmt.executeUpdate();
             }
             return project;
