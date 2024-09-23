@@ -1,4 +1,16 @@
 package main.java.ma.Bati.sc.service.IService;
 
-public interface IProjectService {
+import main.java.ma.Bati.sc.model.Client;
+import main.java.ma.Bati.sc.model.Project;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+public interface IProjectService
+{
+    Project create(Client client);
+    List<Client> getAll ();
+    Optional<Client> findById (UUID id);
+    void delete (UUID id);
 }
