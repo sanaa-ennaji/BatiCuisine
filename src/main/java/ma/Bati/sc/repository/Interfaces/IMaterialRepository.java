@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface IMaterialRepository {
-    Material save (Material material) throws SQLException;
+    Material save (Material material, UUID id) throws SQLException;
     List<Material> getAll();
     Optional<Material> getById(UUID id);
 }

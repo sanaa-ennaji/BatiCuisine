@@ -19,7 +19,7 @@ public class laborRepository implements ILaborRepository {
     }
 
     @Override
-    public Labor save(Labor labor) throws SQLException {
+    public Labor save(Labor labor, UUID id) throws SQLException {
 
         String sql = "INSERT INTO labor (id, name, VATRate, hourlyRate, workHours, workEfficiency, project_id) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {

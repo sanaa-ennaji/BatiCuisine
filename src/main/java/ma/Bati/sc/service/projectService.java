@@ -2,6 +2,8 @@ package main.java.ma.Bati.sc.service;
 
 import main.java.ma.Bati.sc.Enums.ProjectState;
 import main.java.ma.Bati.sc.model.Client;
+import main.java.ma.Bati.sc.model.Labor;
+import main.java.ma.Bati.sc.model.Material;
 import main.java.ma.Bati.sc.model.Project;
 import main.java.ma.Bati.sc.repository.Interfaces.ILaborRepository;
 import main.java.ma.Bati.sc.repository.Interfaces.IMaterialRepository;
@@ -48,13 +50,13 @@ public class projectService implements IProjectService {
         projectRepository.save(project);
         project.getMaterials().forEach(material -> {
             try {
-                materialRepository.saveMaterial(material, project.getId());
+                materialRepository.save(material, project.getId());
             } catch (SQLException e) {        e.printStackTrace();
             }
         });
         project.getLabors().forEach(labor -> {
             try {
-                laborRepository.saveLabor(labor, project.getId());
+                laborRepository.save(labor, project.getId());
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -64,7 +66,27 @@ public class projectService implements IProjectService {
 
     @Override
     public double calculateTotalCost(Project project, Optional<Double> VATRate, Optional<Double> profitMargin) {
-        return 0;
+
+        double materialCost = project.getMaterials().stream()
+                .mapToDouble(Material::calculateTotalCost)
+                .sum();
+
+        double laborCost = project.getLabors().stream()
+                .mapToDouble(Labor::calculateTotalCost)
+                .sum();
+
+        double totalCost = materialCost + laborCost;
+
+        if (VATRate.isPresent()) {
+            totalCost += totalCost * (VATRate.get() / 100);
+        }
+
+        if (profitMargin.isPresent()) {
+            totalCost += totalCost * (profitMargin.get() / 100);
+        }
+
+        return totalCost;
+
     }
 
     @Override

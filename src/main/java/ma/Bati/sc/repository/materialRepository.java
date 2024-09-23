@@ -19,7 +19,7 @@ public class materialRepository implements IMaterialRepository {
     }
 
     @Override
-    public Material save(Material material) throws SQLException {
+    public Material save(Material material, UUID id) throws SQLException {
 
         String sql = "INSERT INTO material (id, name, quantity, unitCost, transportCost, qualityCoefficient, project_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {

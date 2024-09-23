@@ -92,7 +92,13 @@ public class Project {
     public void setLabors(List<Labor> labors) {
         this.labors = labors;
     }
+    public List<Material> getMaterials() {
+        return materials;
+    }
 
+    public List<Labor> getLabors() {
+        return labors;
+    }
 
 
 }
