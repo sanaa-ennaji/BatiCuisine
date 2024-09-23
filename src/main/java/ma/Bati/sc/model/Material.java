@@ -53,6 +53,8 @@ public class Material extends Component {
         this.qualityCoefficient = qualityCoefficient;
     }
 
-
+    public double calculateTotalCost() {
+        return (quantity * uniCost + transportCost) * qualityCoefficient;
+    }
 
 }

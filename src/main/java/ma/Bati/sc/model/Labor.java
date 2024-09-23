@@ -39,4 +39,8 @@ public class Labor extends Component  {
     public void setWorkEfficiency(double workEfficiency) {
         this.workEfficiency = workEfficiency;
     }
+
+    public double calculateTotalCost() {
+        return hourlyRate * workHours * workEfficiency;
+    }
 }
