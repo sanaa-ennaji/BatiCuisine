@@ -67,6 +67,21 @@ public class clientRepository implements IClientRepository {
     public Optional<Client> getById(UUID id) {
         return Optional.empty();
     }
+    public List<Client> findByName(String name) {
+        List<Client> clients = new ArrayList<>();
+        String query = "SELECT * FROM clients WHERE name LIKE ?";
+        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setString(1, "%" + name + "%");
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    clients.add(mapResultSetToClient(rs));
+                }
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException("error fetching the client", e);
+        }
+        return clients;
+    }
 
 
     @Override

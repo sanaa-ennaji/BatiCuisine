@@ -12,4 +12,5 @@ public interface IClientService {
     List<Client> getAll ();
     Optional<Client> findById (UUID id);
     void delete (UUID id);
+
 }
