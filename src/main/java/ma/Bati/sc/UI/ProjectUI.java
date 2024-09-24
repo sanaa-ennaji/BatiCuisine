@@ -18,7 +18,6 @@ public class ProjectUI {
     private final Scanner scanner;
     private final IClientService clientService;
 
-
     public ProjectUI(IProjectService projectService, IClientService clientService) {
         this.projectService = projectService;
         this.scanner = new Scanner(System.in);
@@ -26,7 +25,7 @@ public class ProjectUI {
     }
 
     public void createProject() {
-        System.out.println("--- Création d'un Nouveau Projet ---");
+        System.out.println("--- Creation d'un Nouveau Projet ---");
         System.out.print("Entrez le nom du projet : ");
         String projectName = scanner.nextLine();
 
@@ -88,7 +87,7 @@ public class ProjectUI {
 
             projectService.addMaterialToProject(project, material);
 
-            System.out.println("Matériau ajouté avec succès !");
+            System.out.println("Materiau ajouté avec succes !");
 
 
             System.out.print("Voulez-vous ajouter un autre matériau ? (y/n) : ");
