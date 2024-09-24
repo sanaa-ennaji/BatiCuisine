@@ -29,7 +29,7 @@ public class ProjectUI {
 
         if (client.isEmpty()) {
             System.out.println("Aucun client sélectionné. Abandon de la création du projet.");
-            return; // Exit if no client is selected
+            return;
         }
         System.out.println("--- Creation d'un Nouveau Projet ---");
         System.out.print("Entrez le nom du projet : ");
@@ -41,7 +41,7 @@ public class ProjectUI {
 
         System.out.print("Enter client ID: ");
         UUID clientId = UUID.fromString(scanner.nextLine());
-        Optional<Client> client = clientService.findById(clientId);
+        client = clientService.findById(clientId);
 
         Project project = projectService.create(projectName, surface, client);
         addMaterials(project);
@@ -57,7 +57,7 @@ public class ProjectUI {
     }
 
     private Optional<Client> getClient() {
-        Scanner scanner = new Scanner(System.in);
+
         ClientUI clientUI = new ClientUI(clientService);
 
         System.out.println("--- Recherche de client ---");
