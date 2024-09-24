@@ -1,19 +1,35 @@
 package main.java.ma.Bati.sc.UI;
 
 
+import main.java.ma.Bati.sc.repository.Interfaces.IClientRepository;
+import main.java.ma.Bati.sc.repository.Interfaces.ILaborRepository;
+import main.java.ma.Bati.sc.repository.Interfaces.IMaterialRepository;
 import main.java.ma.Bati.sc.repository.Interfaces.IProjectRepository;
+import main.java.ma.Bati.sc.repository.clientRepository;
+import main.java.ma.Bati.sc.repository.laborRepository;
+import main.java.ma.Bati.sc.repository.materialRepository;
+import main.java.ma.Bati.sc.repository.projectRepository;
 import main.java.ma.Bati.sc.service.IService.IClientService;
 import main.java.ma.Bati.sc.service.IService.IProjectService;
+import main.java.ma.Bati.sc.service.clientService;
+import main.java.ma.Bati.sc.service.projectService;
 
 import java.sql.SQLException;
 import java.util.Scanner;
 
 public class PrincipalMenu {
 private  final ProjectUI projectUI;
-private final Scanner scanner =  new Scanner(System.in);
+private  final ClientUI clientUI;
+    private final Scanner scanner =  new Scanner(System.in);
 
-public PrincipalMenu (IProjectService projectService, IClientService clientService){
-
+public PrincipalMenu (){
+    IProjectRepository projectRepository = new projectRepository();
+    IClientRepository clientRepository = new clientRepository();
+    IMaterialRepository materialRepository = new materialRepository();
+    ILaborRepository laborRepository = new laborRepository();
+    IProjectService projectService = new projectService(projectRepository , materialRepository, laborRepository);
+    IClientService clientService = new clientService(clientRepository);
+    this.clientUI = new ClientUI(clientService);
     this.projectUI = new ProjectUI(projectService, clientService);
 }
 
@@ -33,10 +49,11 @@ public void  Menu () throws SQLException{
      switch(choice){
 
          case 1:
-
-             projectUI.createProject();
+             clientUI.createClient();
 
              break;
+         case 2:
+             projectUI.createProject();
 
          default:
              System.out.println("invalid choice");

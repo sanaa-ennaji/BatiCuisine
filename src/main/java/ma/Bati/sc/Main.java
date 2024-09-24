@@ -24,14 +24,8 @@ public class Main {
         {
             if(connection != null){
                 System.out.println("setnence croisee!");
-                IProjectRepository projectRepository = new projectRepository();
-                IClientRepository clientRepository = new clientRepository();
-                IMaterialRepository materialRepository = new materialRepository();
-                ILaborRepository laborRepository = new laborRepository();
-                IProjectService projectService = new projectService(projectRepository , materialRepository, laborRepository);
-                IClientService clientService = new clientService(clientRepository);
 
-                PrincipalMenu principalMenu = new PrincipalMenu(projectService, clientService);
+                PrincipalMenu principalMenu = new PrincipalMenu();
                 principalMenu.Menu();
             }else{
                 System.out.println("failed");
