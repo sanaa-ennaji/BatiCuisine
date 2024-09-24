@@ -5,6 +5,7 @@ import main.java.ma.Bati.sc.model.Labor;
 import main.java.ma.Bati.sc.model.Material;
 import main.java.ma.Bati.sc.model.Project;
 import main.java.ma.Bati.sc.service.IService.IClientService;
+import main.java.ma.Bati.sc.service.IService.IEstimateService;
 import main.java.ma.Bati.sc.service.IService.IProjectService;
 
 import java.sql.SQLException;
@@ -18,11 +19,13 @@ public class ProjectUI {
     private  final IProjectService projectService;
     private final Scanner scanner;
     private final IClientService clientService;
+    private final IEstimateService estimateService;
 
-    public ProjectUI(IProjectService projectService, IClientService clientService) {
+    public ProjectUI(IProjectService projectService, IClientService clientService , IEstimateService estimateService) {
         this.projectService = projectService;
         this.scanner = new Scanner(System.in);
         this.clientService = clientService;
+        this.estimateService = estimateService;
     }
     public void createProject() {
         Optional<Client> client = getClient();
@@ -46,10 +49,13 @@ public class ProjectUI {
         Project project = projectService.create(projectName, surface, client);
         addMaterials(project);
         addLabor(project);
-        calculateTotalCost(project);
+        double totalCost = calculateTotalCost(project);
         try {
             projectService.save(project);
             System.out.println("project add  done ");
+
+            EstimateUI estimateUI = new EstimateUI(estimateService);
+            estimateUI.createEstimate(project, totalCost);
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("error saving the project ");
@@ -190,7 +196,7 @@ public class ProjectUI {
             addMoreLabor = scanner.nextLine().equalsIgnoreCase("y");
         }
     }
-    private void calculateTotalCost(Project project) {
+    private double calculateTotalCost(Project project) {
         System.out.println("--- Calcul du coût total ---");
         System.out.print("Souhaitez-vous appliquer une marge bénéficiaire au projet ? (y/n) : ");
         boolean applyProfitMargin = scanner.nextLine().equalsIgnoreCase("y");
@@ -206,6 +212,7 @@ public class ProjectUI {
         System.out.println("Le coût total du projet est de : " + totalCost + " €");
         printCostBreakdown(project);
 
+        return totalCost;
     }
 
     private void printCostBreakdown(Project project) {
