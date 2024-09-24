@@ -5,6 +5,7 @@ import main.java.ma.Bati.sc.model.Labor;
 import main.java.ma.Bati.sc.model.Material;
 import main.java.ma.Bati.sc.model.Project;
 import main.java.ma.Bati.sc.service.IService.IClientService;
+import main.java.ma.Bati.sc.service.IService.IEstimateService;
 import main.java.ma.Bati.sc.service.IService.IProjectService;
 
 import java.sql.SQLException;
@@ -18,11 +19,13 @@ public class ProjectUI {
     private  final IProjectService projectService;
     private final Scanner scanner;
     private final IClientService clientService;
+    private final IEstimateService estimateService;
 
-    public ProjectUI(IProjectService projectService, IClientService clientService) {
+    public ProjectUI(IProjectService projectService, IClientService clientService , IEstimateService estimateService) {
         this.projectService = projectService;
         this.scanner = new Scanner(System.in);
         this.clientService = clientService;
+        this.estimateService = estimateService;
     }
     public void createProject() {
         Optional<Client> client = getClient();
@@ -50,6 +53,9 @@ public class ProjectUI {
         try {
             projectService.save(project);
             System.out.println("project add  done ");
+
+            EstimateUI estimateUI = new EstimateUI(estimateService);
+            estimateUI.createEstimate(project, totalCost);
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("error saving the project ");

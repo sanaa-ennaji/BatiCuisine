@@ -1,15 +1,15 @@
 package main.java.ma.Bati.sc.UI;
 
 
-import main.java.ma.Bati.sc.repository.Interfaces.IClientRepository;
-import main.java.ma.Bati.sc.repository.Interfaces.ILaborRepository;
-import main.java.ma.Bati.sc.repository.Interfaces.IMaterialRepository;
-import main.java.ma.Bati.sc.repository.Interfaces.IProjectRepository;
+import main.java.ma.Bati.sc.repository.Interfaces.*;
 import main.java.ma.Bati.sc.repository.clientRepository;
 import main.java.ma.Bati.sc.repository.laborRepository;
 import main.java.ma.Bati.sc.repository.materialRepository;
 import main.java.ma.Bati.sc.repository.projectRepository;
+import main.java.ma.Bati.sc.repository.estimateRepository;
+import main.java.ma.Bati.sc.service.EstimateService;
 import main.java.ma.Bati.sc.service.IService.IClientService;
+import main.java.ma.Bati.sc.service.IService.IEstimateService;
 import main.java.ma.Bati.sc.service.IService.IProjectService;
 import main.java.ma.Bati.sc.service.clientService;
 import main.java.ma.Bati.sc.service.projectService;
@@ -27,10 +27,15 @@ public PrincipalMenu (){
     IClientRepository clientRepository = new clientRepository();
     IMaterialRepository materialRepository = new materialRepository();
     ILaborRepository laborRepository = new laborRepository();
+
+   IEstimateRepository estimateRepository= new estimateRepository();
+    IEstimateService estimateService = new EstimateService(estimateRepository);
+
+
     IProjectService projectService = new projectService(projectRepository , materialRepository, laborRepository);
     IClientService clientService = new clientService(clientRepository);
     this.clientUI = new ClientUI(clientService);
-    this.projectUI = new ProjectUI(projectService, clientService);
+    this.projectUI = new ProjectUI(projectService, clientService , estimateService);
 }
 
 public void  Menu () throws SQLException{
