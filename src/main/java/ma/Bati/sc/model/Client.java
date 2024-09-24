@@ -19,6 +19,9 @@ public class Client {
        this.setPhone(phone);
        this.setIsProfessional(isProfessional);
    }
+    public UUID getId(){
+        return id;
+    }
 
    public void setId(UUID id){
        this.id = id ;
@@ -36,9 +39,7 @@ public class Client {
    public void  setIsProfessional (boolean isProfessional){
        this.isProfessional = isProfessional;
    }
-   public UUID getId (){
-       return id;
-   }
+
    public String getName (){
        return name ;
    }

@@ -28,7 +28,12 @@ private final Connection connection;
                 stmt.setDouble(3, project.getProfitMargin());
                 stmt.setString(4, project.getProjectState().name());
                 stmt.setDouble(5, project.getSurface());
-                stmt.setObject(6, project.getClient().getId());
+//                stmt.setObject(6, project.getClient().getId());
+                if (project.getClient().isPresent()) {
+                    stmt.setObject(6, project.getClient().get().getId());
+                } else {
+                    stmt.setObject(6, null);
+                }
                 stmt.executeUpdate();
             }
             return project;
