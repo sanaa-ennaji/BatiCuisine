@@ -21,7 +21,7 @@ public class laborRepository implements ILaborRepository {
     @Override
     public Labor save(Labor labor, UUID id) throws SQLException {
 
-        String sql = "INSERT INTO labor (id, name, VATRate, hourlyRate, workHours, workEfficiency, project_id) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO labor (id, name, VATRate, hourlyRate, workHours, workEfficiency, project_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setObject(1, labor.getId());
             stmt.setString(2, labor.getName());
