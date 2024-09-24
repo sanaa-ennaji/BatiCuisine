@@ -36,7 +36,8 @@ public PrincipalMenu (){
 public void  Menu () throws SQLException{
     while(true){
         System.out.println("=========================Welcome to the kitchen renovation project management application============================");
-        System.out.println("||==========principal Menu==========||");
+
+        System.out.println("||==========principal Menu==============||");
         System.out.println("||1 - add a new client                  ||");
         System.out.println("||2 - create a new project              ||");
         System.out.println("||3 - view existing projects            ||");

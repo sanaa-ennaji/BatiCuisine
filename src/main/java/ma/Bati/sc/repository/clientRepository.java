@@ -23,10 +23,10 @@ public class clientRepository implements IClientRepository {
         String query = "INSERT INTO clients (id, name, address, phone, isProfessional) VALUES(?, ?, ?, ?, ?)";
         try ( PreparedStatement prst = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)){
             prst.setObject(1, client.getId());
-            prst.setString(1, client.getName());
-            prst.setString(2,client.getAddress());
-            prst.setString(3, client.getPhone());
-            prst.setBoolean(4, client.getIsProfessional());
+            prst.setString(2, client.getName());
+            prst.setString(3,client.getAddress());
+            prst.setString(4, client.getPhone());
+            prst.setBoolean(5, client.getIsProfessional());
 
 
 

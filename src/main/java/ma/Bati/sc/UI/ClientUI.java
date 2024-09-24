@@ -2,8 +2,6 @@ package main.java.ma.Bati.sc.UI;
 
 import main.java.ma.Bati.sc.model.Client;
 import main.java.ma.Bati.sc.service.IService.IClientService;
-
-import java.sql.SQLException;
 import java.util.Scanner;
 
 public class ClientUI {
@@ -25,6 +23,7 @@ public class ClientUI {
         String phone = scanner.nextLine();
         System.out.println("is professional (Y/n)");
         boolean isProfessional = Boolean.parseBoolean(scanner.nextLine());
+
 
         Client client = new Client(
                 name,
