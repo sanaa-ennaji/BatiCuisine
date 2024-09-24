@@ -12,6 +12,7 @@ public interface IClientRepository {
     Client save (Client client);
     void update(Client client);
     void delete (UUID id);
+      List<Client> findByName(String name);
 
 }
 

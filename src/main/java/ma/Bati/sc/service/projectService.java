@@ -93,12 +93,13 @@ public class projectService implements IProjectService {
     }
 
     @Override
-    public List<Client> getAll() {
+    public List<Project> getAll() {
         return List.of();
     }
 
+
     @Override
-    public Optional<Client> findById(UUID id) {
+    public Optional<Project> findById(UUID id) {
         return Optional.empty();
     }
 

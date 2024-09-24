@@ -31,6 +31,9 @@ public class clientService  implements IClientService{
     public List<Client> getAll() {
         return clientRepository.getAll();
     }
+    public List<Client> findByName(String name) {
+        return clientRepository.findByName(name);
+    }
 
     @Override
     public Optional<Client> findById(UUID id) {
