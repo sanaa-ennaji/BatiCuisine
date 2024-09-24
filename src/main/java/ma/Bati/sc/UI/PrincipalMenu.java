@@ -60,7 +60,8 @@ public void  Menu () throws SQLException{
              break;
          case 2:
              projectUI.createProject();
-
+         case 3:
+            projectUI.displayAllProjects();
          default:
              System.out.println("invalid choice");
              Menu();

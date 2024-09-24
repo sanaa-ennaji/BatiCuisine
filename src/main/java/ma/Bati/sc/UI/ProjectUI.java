@@ -265,6 +265,13 @@ public class ProjectUI {
         });
     }
 
+    public void displayAllProjects() throws SQLException {
+        List<Project> projects = projectService.getAll();
+        System.out.println("List of all projects:");
+        for (Project project : projects) {
+            System.out.println(project);
+        }
+    }
 
 
 
