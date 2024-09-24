@@ -1,14 +1,20 @@
 package main.java.ma.Bati.sc.UI;
 
+
+import main.java.ma.Bati.sc.repository.Interfaces.IProjectRepository;
+import main.java.ma.Bati.sc.service.IService.IClientService;
+import main.java.ma.Bati.sc.service.IService.IProjectService;
+
 import java.sql.SQLException;
 import java.util.Scanner;
 
 public class PrincipalMenu {
-
+private  final ProjectUI projectUI;
 private final Scanner scanner =  new Scanner(System.in);
 
-public PrincipalMenu (){
+public PrincipalMenu (IProjectService projectService, IClientService clientService){
 
+    this.projectUI = new ProjectUI(projectService, clientService);
 }
 
 public void  Menu () throws SQLException{
@@ -27,7 +33,9 @@ public void  Menu () throws SQLException{
      switch(choice){
 
          case 1:
-             System.out.println("still working on it");
+
+             projectUI.createProject();
+
              break;
 
          default:

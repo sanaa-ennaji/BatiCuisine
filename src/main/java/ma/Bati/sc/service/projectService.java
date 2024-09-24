@@ -28,6 +28,8 @@ public class projectService implements IProjectService {
     }
 
 
+
+
     @Override
     public Project create(String projectName, double surface, Optional<Client> client) {
         UUID projectId = UUID.randomUUID();
@@ -48,47 +50,39 @@ public class projectService implements IProjectService {
     @Override
     public void save(Project project) throws SQLException {
         projectRepository.save(project);
-        project.getMaterials().forEach(material -> {
-            try {
-                materialRepository.save(material, project.getId());
-            } catch (SQLException e) {        e.printStackTrace();
-            }
-        });
-        project.getLabors().forEach(labor -> {
-            try {
-                laborRepository.save(labor, project.getId());
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        });
+        for (Material material : project.getMaterials()) {
+            materialRepository.save(material, project.getId());
+        }
+        for (Labor labor : project.getLabors()) {
+            laborRepository.save(labor, project.getId());
+        }
+    }
 
+
+    public void addMaterialToProject(Project project, Material material) {
+        project.getMaterials().add(material);
+    }
+
+
+    public void addLaborToProject(Project project, Labor labor) {
+        project.getLabors().add(labor);
     }
 
     @Override
     public double calculateTotalCost(Project project, Optional<Double> VATRate, Optional<Double> profitMargin) {
-
-        double materialCost = project.getMaterials().stream()
-                .mapToDouble(Material::calculateTotalCost)
-                .sum();
-
-        double laborCost = project.getLabors().stream()
-                .mapToDouble(Labor::calculateTotalCost)
-                .sum();
-
+        double materialCost = project.getMaterials().stream().mapToDouble(Material::calculateTotalCost).sum();
+        double laborCost = project.getLabors().stream().mapToDouble(Labor::calculateTotalCost).sum();
         double totalCost = materialCost + laborCost;
 
         if (VATRate.isPresent()) {
             totalCost += totalCost * (VATRate.get() / 100);
         }
-
         if (profitMargin.isPresent()) {
             totalCost += totalCost * (profitMargin.get() / 100);
         }
 
         return totalCost;
-
     }
-
     @Override
     public List<Client> getAll() {
         return List.of();
