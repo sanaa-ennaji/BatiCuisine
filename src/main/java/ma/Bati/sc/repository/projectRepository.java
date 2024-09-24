@@ -1,12 +1,12 @@
 package main.java.ma.Bati.sc.repository;
 
+import main.java.ma.Bati.sc.Enums.ProjectState;
 import main.java.ma.Bati.sc.config.DatabaseConnection;
 import main.java.ma.Bati.sc.model.Project;
 import main.java.ma.Bati.sc.repository.Interfaces.IProjectRepository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -46,10 +46,29 @@ private final Connection connection;
 
 
     @Override
-    public List<Project> getAll() {
+    public List<Project> getAll() throws SQLException {
+        List<Project> projectList = new ArrayList<>();
+        String sql = "SELECT * FROM projects";
 
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
 
-        return List.of();
+            while (rs.next()) {
+                Project project = new Project();
+                project.setId(UUID.fromString(rs.getString("id")));
+                project.setProjectName(rs.getString("projectName"));
+                project.setProfitMargin(rs.getDouble("profitMargin"));
+
+                ProjectState projectState = ProjectState.valueOf(rs.getString("projectState"));
+                project.setProjectState(projectState);
+
+                project.setSurface(rs.getDouble("surface"));
+
+                projectList.add(project);
+            }
+        }
+
+        return projectList;
     }
 
 

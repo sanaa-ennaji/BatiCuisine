@@ -93,18 +93,9 @@ public class projectService implements IProjectService {
     }
 
     @Override
-    public List<Project> getAll() {
-        return List.of();
+    public List<Project> getAll() throws SQLException {
+        return projectRepository.getAll();
     }
 
 
-    @Override
-    public Optional<Project> findById(UUID id) {
-        return Optional.empty();
-    }
-
-    @Override
-    public void delete(UUID id) {
-
-    }
 }

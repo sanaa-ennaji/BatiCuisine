@@ -15,11 +15,7 @@ public interface IProjectService
     Project create(String projectName, double surface, Optional<Client> client);
     void save (Project project) throws SQLException;
     double calculateTotalCost(Project project, Optional<Double> profitMargin);
-
-    List<Project> getAll ();
-    Optional<Project> findById (UUID id);
-    void delete (UUID id);
-
+    List<Project> getAll () throws SQLException;
     void addLaborToProject(Project project, Labor labor);
     void addMaterialToProject(Project project, Material material);
 }

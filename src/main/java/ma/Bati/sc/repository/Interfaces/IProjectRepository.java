@@ -10,7 +10,7 @@ import java.util.UUID;
 public interface IProjectRepository {
 
    Project save (Project project) throws SQLException;
-   List<Project> getAll();
+   List<Project> getAll()throws SQLException;
    Optional<Project> getById(UUID id);
 
 
