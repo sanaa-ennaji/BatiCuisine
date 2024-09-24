@@ -22,7 +22,7 @@ public class projectService implements IProjectService {
 
 
     public projectService(IProjectRepository projectRepository, IMaterialRepository materialRepository, ILaborRepository laborRepository) {
-        this.projectRepository = projectRepository;
+        this.projectRepository =  projectRepository;
         this.materialRepository = materialRepository;
         this.laborRepository = laborRepository;
     }

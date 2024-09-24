@@ -33,13 +33,13 @@ public class clientRepository implements IClientRepository {
                     client.setId((UUID) generatedKeys.getObject(1));
                 }
             }
-//            System.out.println("Executing query: " + prst);
-//
-//            int affectedRows = prst.executeUpdate();
-//
-//            if (affectedRows == 0) {
-//                throw new SQLException("Inserting client failed, no rows affected.");
-//            }
+            System.out.println("Executing query: " + prst);
+
+          int affectedRows = prst.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Inserting client failed, no rows affected.");
+           }
 
         } catch (SQLException e) {
             throw new DatabaseException("Error saving the client", e);
