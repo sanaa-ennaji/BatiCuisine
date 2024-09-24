@@ -43,6 +43,30 @@ public class estimateRepository implements IEstimateRepository {
 
     @Override
     public Optional<Estimate> findById(UUID id) {
+        String query = "SELECT * FROM estimates WHERE id = ?";
 
+        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setObject(1, id);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                Estimate estimate = new Estimate();
+                estimate.setId((UUID) rs.getObject("id"));
+                estimate.setEstimatedAmount(rs.getDouble("estimated_amount"));
+                estimate.setIssueDate(rs.getDate("issue_date").toLocalDate());
+                estimate.setValidatyDate(rs.getDate("validaty_date").toLocalDate());
+                estimate.setAccepted(rs.getBoolean("accepted"));
+                // estimate.setProject(retrieveProjectById(rs.getObject("project_id")));
+
+                return Optional.of(estimate);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error finding estimate by ID: " + e.getMessage());
+        }
+
+        return Optional.empty();
     }
 }
