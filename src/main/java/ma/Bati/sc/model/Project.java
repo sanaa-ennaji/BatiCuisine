@@ -95,11 +95,18 @@ public class Project {
         this.labors = labors;
     }
     public List<Material> getMaterials() {
+        if (materials == null) {
+            materials = new ArrayList<>();
+        }
         return materials;
     }
 
+
     public List<Labor> getLabors() {
-        return labors;
+        if(labors == null){
+            labors = new ArrayList<>();
+        }
+        return  labors ;
     }
 
 

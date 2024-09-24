@@ -21,18 +21,17 @@ private final Connection connection;
     @Override
     public Project save(Project project) throws SQLException {
 
-            String sql = "INSERT INTO projects (id, projetName, profitMargin, projectState, client_id) VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO projects (id, projectName, profitMargin, projectState, surface, client_id) VALUES (?, ?, ?,  ?::project_state_enum, ?, ?)";
             try (PreparedStatement stmt = connection.prepareStatement(sql)) {
                 stmt.setObject(1, project.getId());
                 stmt.setString(2, project.getProjectName());
                 stmt.setDouble(3, project.getProfitMargin());
                 stmt.setString(4, project.getProjectState().name());
                 stmt.setDouble(5, project.getSurface());
-//                stmt.setObject(6, project.getClient().getId());
                 if (project.getClient().isPresent()) {
                     stmt.setObject(6, project.getClient().get().getId());
                 } else {
-                    stmt.setObject(6, null);
+                    stmt.setNull(6, java.sql.Types.OTHER);
                 }
                 stmt.executeUpdate();
             }
