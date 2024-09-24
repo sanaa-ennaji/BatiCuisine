@@ -16,8 +16,8 @@ public interface IProjectService
     void save (Project project) throws SQLException;
     double calculateTotalCost(Project project, Optional<Double> profitMargin);
 
-    List<Client> getAll ();
-    Optional<Client> findById (UUID id);
+    List<Project> getAll ();
+    Optional<Project> findById (UUID id);
     void delete (UUID id);
 
     void addLaborToProject(Project project, Labor labor);
