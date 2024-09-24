@@ -1,6 +1,8 @@
 package main.java.ma.Bati.sc.service.IService;
 
 import main.java.ma.Bati.sc.model.Client;
+import main.java.ma.Bati.sc.model.Labor;
+import main.java.ma.Bati.sc.model.Material;
 import main.java.ma.Bati.sc.model.Project;
 
 import java.sql.SQLException;
@@ -16,4 +18,7 @@ public interface IProjectService
     List<Client> getAll ();
     Optional<Client> findById (UUID id);
     void delete (UUID id);
+
+    void addLaborToProject(Project project, Labor labor);
+    void addMaterialToProject(Project project, Material material);
 }
