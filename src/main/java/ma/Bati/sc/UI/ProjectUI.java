@@ -16,12 +16,13 @@ public class ProjectUI {
 
     private  final IProjectService projectService;
     private final Scanner scanner;
-    private final IClientService clientService ;
+    private final IClientService clientService;
 
-    public ProjectUI(IProjectService projectService) {
+
+    public ProjectUI(IProjectService projectService, IClientService clientService) {
         this.projectService = projectService;
         this.scanner = new Scanner(System.in);
-        this.clientService = clientService ;
+        this.clientService = clientService;
     }
 
     public void createProject() {
@@ -129,6 +130,30 @@ public class ProjectUI {
             System.out.print("Voulez-vous ajouter un autre type de main-d'œuvre ? (y/n) : ");
             addMoreLabor = scanner.nextLine().equalsIgnoreCase("y");
         }
+    }
+    private void calculateTotalCost(Project project) {
+        System.out.println("--- Calcul du coût total ---");
+
+        System.out.print("Souhaitez-vous appliquer une TVA au projet ? (y/n) : ");
+        boolean applyVAT = scanner.nextLine().equalsIgnoreCase("y");
+        Optional<Double> vatRate = Optional.empty();
+        if (applyVAT) {
+            System.out.print("Entrez le pourcentage de TVA (%) : ");
+            vatRate = Optional.of(Double.parseDouble(scanner.nextLine()));
+        }
+
+        System.out.print("Souhaitez-vous appliquer une marge bénéficiaire au projet ? (y/n) : ");
+        boolean applyProfitMargin = scanner.nextLine().equalsIgnoreCase("y");
+        Optional<Double> profitMargin = Optional.empty();
+        if (applyProfitMargin) {
+            System.out.print("Entrez le pourcentage de marge bénéficiaire (%) : ");
+            profitMargin = Optional.of(Double.parseDouble(scanner.nextLine()));
+        }
+
+        double totalCost = projectService.calculateTotalCost(project, vatRate, profitMargin);
+        project.setTotalCost(totalCost);
+
+        System.out.println("Le coût total du projet est de : " + totalCost + " €");
     }
 
 
