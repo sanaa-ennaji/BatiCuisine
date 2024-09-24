@@ -59,6 +59,8 @@ public class projectService implements IProjectService {
     }
 
 
+
+
     public void addMaterialToProject(Project project, Material material) {
         project.getMaterials().add(material);
 
@@ -70,20 +72,26 @@ public class projectService implements IProjectService {
     }
 
     @Override
-    public double calculateTotalCost(Project project, Optional<Double> VATRate, Optional<Double> profitMargin) {
-        double materialCost = project.getMaterials().stream().mapToDouble(Material::calculateTotalCost).sum();
-        double laborCost = project.getLabors().stream().mapToDouble(Labor::calculateTotalCost).sum();
+    public double calculateTotalCost(Project project, Optional<Double> profitMargin) {
+
+        double materialCost = project.getMaterials().stream()
+                .mapToDouble(material -> material.calculateTotalCost() + (material.calculateTotalCost() * material.getVATRate() / 100))
+                .sum();
+
+        double laborCost = project.getLabors().stream()
+                .mapToDouble(labor -> labor.calculateTotalCost() + (labor.calculateTotalCost() * labor.getVATRate() / 100))
+                .sum();
+
+
         double totalCost = materialCost + laborCost;
 
-        if (VATRate.isPresent()) {
-            totalCost += totalCost * (VATRate.get() / 100);
-        }
         if (profitMargin.isPresent()) {
             totalCost += totalCost * (profitMargin.get() / 100);
         }
 
         return totalCost;
     }
+
     @Override
     public List<Client> getAll() {
         return List.of();

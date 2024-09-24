@@ -42,8 +42,11 @@ private final Connection connection;
 
     @Override
     public List<Project> getAll() {
+
+
         return List.of();
     }
+
 
     @Override
     public Optional<Project> getById(UUID id) {

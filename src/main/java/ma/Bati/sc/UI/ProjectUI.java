@@ -133,13 +133,6 @@ public class ProjectUI {
     private void calculateTotalCost(Project project) {
         System.out.println("--- Calcul du coût total ---");
 
-        System.out.print("Souhaitez-vous appliquer une TVA au projet ? (y/n) : ");
-        boolean applyVAT = scanner.nextLine().equalsIgnoreCase("y");
-        Optional<Double> vatRate = Optional.empty();
-        if (applyVAT) {
-            System.out.print("Entrez le pourcentage de TVA (%) : ");
-            vatRate = Optional.of(Double.parseDouble(scanner.nextLine()));
-        }
 
         System.out.print("Souhaitez-vous appliquer une marge bénéficiaire au projet ? (y/n) : ");
         boolean applyProfitMargin = scanner.nextLine().equalsIgnoreCase("y");
@@ -149,7 +142,7 @@ public class ProjectUI {
             profitMargin = Optional.of(Double.parseDouble(scanner.nextLine()));
         }
 
-        double totalCost = projectService.calculateTotalCost(project, vatRate, profitMargin);
+        double totalCost = projectService.calculateTotalCost(project, profitMargin);
         project.setTotalCost(totalCost);
 
         System.out.println("Le coût total du projet est de : " + totalCost + " €");
