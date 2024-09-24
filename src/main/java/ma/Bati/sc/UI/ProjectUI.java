@@ -8,6 +8,7 @@ import main.java.ma.Bati.sc.service.IService.IClientService;
 import main.java.ma.Bati.sc.service.IService.IProjectService;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.UUID;
@@ -24,9 +25,16 @@ public class ProjectUI {
         this.clientService = clientService;
     }
     public void createProject() {
+        Optional<Client> client = getClient();
+
+        if (client.isEmpty()) {
+            System.out.println("Aucun client sélectionné. Abandon de la création du projet.");
+            return; // Exit if no client is selected
+        }
         System.out.println("--- Creation d'un Nouveau Projet ---");
         System.out.print("Entrez le nom du projet : ");
         String projectName = scanner.nextLine();
+
 
         System.out.print("Entrez la surface de la cuisine (en m²) : ");
         double surface = Double.parseDouble(scanner.nextLine());
@@ -47,6 +55,62 @@ public class ProjectUI {
             System.out.println("error saving the project ");
         }
     }
+
+    private Optional<Client> getClient() {
+        Scanner scanner = new Scanner(System.in);
+        ClientUI clientUI = new ClientUI(clientService);
+
+        System.out.println("--- Recherche de client ---");
+        System.out.println("Souhaitez-vous chercher un client existant ou en ajouter un nouveau ?");
+        System.out.println("1. Chercher un client existant");
+        System.out.println("2. Ajouter un nouveau client");
+        System.out.print("Choisissez une option : ");
+
+        int option = Integer.parseInt(scanner.nextLine());
+        Optional<Client> client;
+
+        if (option == 1) {
+            System.out.println("--- Recherche de client existant ---");
+            System.out.print("Entrez le nom du client : ");
+            String clientName = scanner.nextLine();
+
+
+            List<Client> clients = clientService.findByName(clientName);
+
+            if (clients.isEmpty()) {
+                System.out.println("Client non trouvé !");
+                return Optional.empty();
+            } else {
+                Client foundClient = clients.get(0);
+                System.out.println("Client trouvé !");
+                System.out.println("Nom : " + foundClient.getName());
+                System.out.println("Adresse : " + foundClient.getAddress());
+                System.out.println("Numéro de téléphone : " + foundClient.getPhone());
+
+                System.out.print("Souhaitez-vous continuer avec ce client ? (y/n) : ");
+                String response = scanner.nextLine();
+                if (response.equalsIgnoreCase("y")) {
+                    return Optional.of(foundClient);
+                } else {
+                    return Optional.empty();
+                }
+            }
+        } else if (option == 2) {
+            clientUI.createClient();
+            System.out.print("Entrez l'ID du client que vous venez d'ajouter : ");
+            UUID clientId = UUID.fromString(scanner.nextLine());
+            client = clientService.findById(clientId);
+            if (client.isEmpty()) {
+                System.out.println("Client non trouvé après l'ajout.");
+                return Optional.empty();
+            }
+            return client;
+        } else {
+            System.out.println("Option invalide !");
+            return Optional.empty();
+        }
+    }
+
 
 
     private void addMaterials(Project project) {
