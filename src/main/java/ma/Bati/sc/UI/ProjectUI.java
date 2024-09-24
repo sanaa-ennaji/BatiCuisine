@@ -156,7 +156,6 @@ public class ProjectUI {
         System.out.println("Surface : " + project.getSurface() + " m²");
         System.out.println("--- Détail des Coûts ---");
 
-        // Materials Breakdown
         double totalMaterialCostBeforeVAT = 0;
         double totalMaterialCostWithVAT = 0;
         System.out.println("1. Matériaux :");

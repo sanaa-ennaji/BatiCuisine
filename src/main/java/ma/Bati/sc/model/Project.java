@@ -46,8 +46,8 @@ public class Project {
     public String getProjectName(){
         return projectName;
     }
-    public double getProfitMargin(){
-        return profitMargin ;
+    public Optional<Double> getProfitMargin(){
+        return Optional.of(profitMargin);
     }
     public double getTotalCost(){
         return totalCost;
