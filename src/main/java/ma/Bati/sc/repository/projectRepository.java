@@ -25,7 +25,12 @@ private final Connection connection;
             try (PreparedStatement stmt = connection.prepareStatement(sql)) {
                 stmt.setObject(1, project.getId());
                 stmt.setString(2, project.getProjectName());
-                stmt.setDouble(3, project.getProfitMargin());
+                if (project.getProfitMargin().isPresent()) {
+                    stmt.setDouble(3, project.getProfitMargin().get());
+                } else {
+                    stmt.setNull(3, java.sql.Types.DOUBLE);
+                }
+
                 stmt.setString(4, project.getProjectState().name());
                 stmt.setDouble(5, project.getSurface());
                 if (project.getClient().isPresent()) {
@@ -42,8 +47,11 @@ private final Connection connection;
 
     @Override
     public List<Project> getAll() {
+
+
         return List.of();
     }
+
 
     @Override
     public Optional<Project> getById(UUID id) {

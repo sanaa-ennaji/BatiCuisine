@@ -132,15 +132,6 @@ public class ProjectUI {
     }
     private void calculateTotalCost(Project project) {
         System.out.println("--- Calcul du coût total ---");
-
-        System.out.print("Souhaitez-vous appliquer une TVA au projet ? (y/n) : ");
-        boolean applyVAT = scanner.nextLine().equalsIgnoreCase("y");
-        Optional<Double> vatRate = Optional.empty();
-        if (applyVAT) {
-            System.out.print("Entrez le pourcentage de TVA (%) : ");
-            vatRate = Optional.of(Double.parseDouble(scanner.nextLine()));
-        }
-
         System.out.print("Souhaitez-vous appliquer une marge bénéficiaire au projet ? (y/n) : ");
         boolean applyProfitMargin = scanner.nextLine().equalsIgnoreCase("y");
         Optional<Double> profitMargin = Optional.empty();
@@ -148,12 +139,65 @@ public class ProjectUI {
             System.out.print("Entrez le pourcentage de marge bénéficiaire (%) : ");
             profitMargin = Optional.of(Double.parseDouble(scanner.nextLine()));
         }
-
-        double totalCost = projectService.calculateTotalCost(project, vatRate, profitMargin);
+        double totalCost = projectService.calculateTotalCost(project, profitMargin);
         project.setTotalCost(totalCost);
 
+
         System.out.println("Le coût total du projet est de : " + totalCost + " €");
+        printCostBreakdown(project);
+
     }
+
+    private void printCostBreakdown(Project project) {
+        System.out.println("--- Résultat du Calcul ---");
+        System.out.println("Nom du projet : " + project.getProjectName());
+        System.out.println("Client : " + project.getClient().map(Client::getName).orElse("Inconnu"));
+        System.out.println("Adresse du chantier : " + project.getClient().map(Client::getAddress).orElse("Adresse non fournie"));
+        System.out.println("Surface : " + project.getSurface() + " m²");
+        System.out.println("--- Détail des Coûts ---");
+
+        double totalMaterialCostBeforeVAT = 0;
+        double totalMaterialCostWithVAT = 0;
+        System.out.println("1. Matériaux :");
+        for (Material material : project.getMaterials()) {
+            double materialCostBeforeVAT = material.getQuantity() * material.getUnitCost() + material.getTransportCost();
+            double materialCostWithVAT = materialCostBeforeVAT * (1 + material.getVATRate() / 100);
+            totalMaterialCostBeforeVAT += materialCostBeforeVAT;
+            totalMaterialCostWithVAT += materialCostWithVAT;
+
+            System.out.println("- " + material.getName() + " : " + String.format("%.2f", materialCostWithVAT) + " € " +
+                    "(quantité : " + material.getQuantity() + " m²/litres, coût unitaire : " + material.getUnitCost() + " €/unité, qualité : " +
+                    material.getQualityCoefficient() + ", transport : " + material.getTransportCost() + " €)");
+        }
+        System.out.println("**Coût total des matériaux avant TVA : " + String.format("%.2f", totalMaterialCostBeforeVAT) + " €**");
+        System.out.println("**Coût total des matériaux avec TVA : " + String.format("%.2f", totalMaterialCostWithVAT) + " €**");
+
+        double totalLaborCostBeforeVAT = 0;
+        double totalLaborCostWithVAT = 0;
+        System.out.println("2. Main-d'œuvre :");
+        for (Labor labor : project.getLabors()) {
+            double laborCostBeforeVAT = labor.getHourlyRate() * labor.getWorkHours();
+            double laborCostWithVAT = laborCostBeforeVAT * (1 + labor.getVATRate() / 100);
+            totalLaborCostBeforeVAT += laborCostBeforeVAT;
+            totalLaborCostWithVAT += laborCostWithVAT;
+
+            System.out.println("- " + labor.getName() + " : " + String.format("%.2f", laborCostWithVAT) + " € " +
+                    "(taux horaire : " + labor.getHourlyRate() + " €/h, heures travaillées : " + labor.getWorkHours() +
+                    " h, productivité : " + labor.getWorkEfficiency() + ")");
+        }
+        System.out.println("**Coût total de la main-d'œuvre avant TVA : " + String.format("%.2f", totalLaborCostBeforeVAT) + " €**");
+        System.out.println("**Coût total de la main-d'œuvre avec TVA : " + String.format("%.2f", totalLaborCostWithVAT) + " €**");
+
+        double totalCostBeforeProfit = totalMaterialCostBeforeVAT + totalLaborCostBeforeVAT;
+        System.out.println("3. Coût total avant marge : " + String.format("%.2f", totalCostBeforeProfit) + " €");
+
+        project.getProfitMargin().ifPresent(profitMargin -> {
+            double marginValue = totalCostBeforeProfit * (profitMargin / 100);
+            System.out.println("4. Marge bénéficiaire (" + profitMargin + "%) : " + String.format("%.2f", marginValue) + " €");
+            System.out.println("**Coût total final du projet : " + String.format("%.2f", project.getTotalCost()) + " €**");
+        });
+    }
+
 
 
 
