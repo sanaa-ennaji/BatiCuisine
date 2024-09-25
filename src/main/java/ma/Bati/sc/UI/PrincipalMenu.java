@@ -46,7 +46,6 @@ public void  Menu () throws SQLException{
         System.out.println("||1 - add a new client                  ||");
         System.out.println("||2 - create a new project              ||");
         System.out.println("||3 - view existing projects            ||");
-        System.out.println("||4 - calculate the cost of projects    ||");
         System.out.println("||======================================||");
         System.out.print("enter your choice :");
      int choice = scanner.nextInt();
@@ -60,8 +59,10 @@ public void  Menu () throws SQLException{
              break;
          case 2:
              projectUI.createProject();
+             break ;
          case 3:
             projectUI.displayAllProjects();
+            break;
          default:
              System.out.println("invalid choice");
              Menu();

@@ -1,5 +1,6 @@
 package main.java.ma.Bati.sc.service.IService;
 
+import main.java.ma.Bati.sc.Enums.ProjectState;
 import main.java.ma.Bati.sc.model.Client;
 import main.java.ma.Bati.sc.model.Labor;
 import main.java.ma.Bati.sc.model.Material;

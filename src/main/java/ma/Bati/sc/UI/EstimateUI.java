@@ -20,18 +20,24 @@ public class EstimateUI {
     }
 
     public void createEstimate(Project project, double totalCost) {
+
         System.out.println("Coût total final du projet : " + String.format("%.2f", totalCost) + " €");
 
         System.out.println("--- Enregistrement du Devis ---");
         LocalDate issueDate = getValidDate("Entrez la date d'émission du devis (format : jj/mm/aaaa) : ");
-        LocalDate validatyDate = getValidDate("Entrez la date de validité du devis (format : jj/mm/aaaa) : ");
+        LocalDate validityDate = getValidDate("Entrez la date de validité du devis (format : jj/mm/aaaa) : ");
         System.out.print("Souhaitez-vous enregistrer le devis ? (y/n) : ");
         String saveDecision = scanner.nextLine().trim().toLowerCase();
 
         if (saveDecision.equals("y")) {
-            Estimate estimate = new Estimate(UUID.randomUUID(), totalCost, issueDate, validatyDate, false, project);
-            estimateService.create(estimate);
-            System.out.println("Devis enregistré avec succès !");
+            Estimate estimate = new Estimate(UUID.randomUUID(), totalCost, issueDate, validityDate, false, project);
+            if (estimate.getProject() == null) {
+                System.out.println("Devis enregistré avec succès !");
+            } else {
+                estimateService.create(estimate);
+                System.out.println("Devis enregistré avec succès !");
+            }
+
         } else {
             System.out.println("Devis non enregistré.");
         }

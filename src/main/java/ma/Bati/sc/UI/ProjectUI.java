@@ -32,7 +32,7 @@ public class ProjectUI {
         Optional<Client> client = getClient();
 
         if (client.isEmpty()) {
-            System.out.println("Aucun client sélectionné. Abandon de la création du projet.");
+            System.out.println("Aucun client sélectionne. Abandon de la création du projet.");
             return;
         }
 
@@ -60,6 +60,7 @@ public class ProjectUI {
 
             EstimateUI estimateUI = new EstimateUI(estimateService);
             estimateUI.createEstimate(project, totalCost);
+
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Erreur lors de l'enregistrement du projet.");
@@ -116,9 +117,6 @@ public class ProjectUI {
             return Optional.empty();
         }
     }
-
-
-
 
 
     private void addMaterials(Project project) {
@@ -268,8 +266,8 @@ public class ProjectUI {
         System.out.println("3. Coût total avant marge : " + String.format("%.2f", totalCostBeforeProfit) + " €");
 
         project.getProfitMargin().ifPresent(profitMargin -> {
-            double marginValue = totalCostBeforeProfit * (profitMargin / 100);
-            System.out.println("4. Marge bénéficiaire (" + profitMargin + "%) : " + String.format("%.2f", marginValue) + " €");
+//            double marginValue = totalCostBeforeProfit * (profitMargin / 100);
+//            System.out.println("4. Marge bénéficiaire (" + profitMargin + "%) : " + String.format("%.2f", marginValue) + " €");
             System.out.println("**Coût total final du projet : " + String.format("%.2f", project.getTotalCost()) + " €**");
         });
     }

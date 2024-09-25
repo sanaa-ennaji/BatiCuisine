@@ -1,6 +1,6 @@
 package main.java.ma.Bati.sc.model;
 
-import java.util.Optional;
+import java.util.List;
 import java.util.UUID;
 
 public class Client {
@@ -9,6 +9,7 @@ public class Client {
    private String address;
    private String phone;
    private boolean isProfessional;
+    private List<Project> projects;
 
    public Client (){
 
