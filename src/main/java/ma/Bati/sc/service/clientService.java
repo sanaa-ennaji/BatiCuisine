@@ -27,10 +27,10 @@ public class clientService  implements IClientService{
     }
 
 
-    @Override
-    public List<Client> getAll() {
-        return clientRepository.getAll();
-    }
+//    @Override
+//    public List<Client> getAll() {
+//        return clientRepository.getAll();
+//    }
     public List<Client> findByName(String name) {
         return clientRepository.findByName(name);
     }

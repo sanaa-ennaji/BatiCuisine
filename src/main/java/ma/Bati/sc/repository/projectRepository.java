@@ -30,20 +30,14 @@ private final Connection connection;
                 } else {
                     stmt.setNull(3, java.sql.Types.DOUBLE);
                 }
-
                 stmt.setString(4, project.getProjectState().name());
                 stmt.setDouble(5, project.getSurface());
-                if (project.getClient().isPresent()) {
-                    stmt.setObject(6, project.getClient().get().getId());
-                } else {
-                    stmt.setNull(6, java.sql.Types.OTHER);
-                }
-                stmt.executeUpdate();
-            }
+                    stmt.setObject(6, project.getClient().getId());
+
             return project;
         }
 
-
+}
 
     @Override
     public List<Project> getAll() throws SQLException {

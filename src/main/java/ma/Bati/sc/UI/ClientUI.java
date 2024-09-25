@@ -14,7 +14,7 @@ public class ClientUI {
         this.clientService = clientService;
     }
 
-    public void createClient(){
+    public Client createClient() {
         System.out.print("Enter the name: ");
         String name = scanner.nextLine();
 
@@ -37,17 +37,13 @@ public class ClientUI {
             isProfessional = false;
         }
 
-        Client client = new Client(
-                name,
-                address,
-                phone,
-                isProfessional
-        );
-
+        Client client = new Client(name, address, phone, isProfessional);
 
         clientService.create(client);
         System.out.println("Client creation done.");
 
+        return client;
     }
+
 
 }

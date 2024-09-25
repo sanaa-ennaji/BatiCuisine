@@ -35,10 +35,12 @@ public class laborRepository implements ILaborRepository {
         return labor;
     }
 
-    @Override
-    public List<Labor> getAll() {
-        return List.of();
-    }
+
+
+//    @Override
+//    public List<Labor> getAll() {
+//        return List.of();
+//    }
 
     @Override
     public Optional<Labor> getById(UUID id) {

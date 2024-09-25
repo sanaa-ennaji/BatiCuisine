@@ -33,7 +33,7 @@ public class clientRepository implements IClientRepository {
                     client.setId((UUID) generatedKeys.getObject(1));
                 }
             }
-            System.out.println("Executing query: " + prst);
+       //     System.out.println("Executing query: " + prst);
 
           int affectedRows = prst.executeUpdate();
 
@@ -47,21 +47,21 @@ public class clientRepository implements IClientRepository {
         return client;
     }
 
-    @Override
-    public List<Client> getAll() {
-        List<Client> clients = new ArrayList<>();
-        String query = "SELECT * FROM clients";
-        try (Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(query)){
-          while (rs.next()){
-              Client client = mapResultSetToClient(rs);
-              clients.add(client);
-          }
-        } catch (SQLException e) {
-            throw new DatabaseException("Error fetching clients", e);
-        }
-        return List.of();
-    }
+//    @Override
+//    public List<Client> getAll() {
+//        List<Client> clients = new ArrayList<>();
+//        String query = "SELECT * FROM clients";
+//        try (Statement stmt = connection.createStatement();
+//             ResultSet rs = stmt.executeQuery(query)){
+//          while (rs.next()){
+//              Client client = mapResultSetToClient(rs);
+//              clients.add(client);
+//          }
+//        } catch (SQLException e) {
+//            throw new DatabaseException("Error fetching clients", e);
+//        }
+//        return List.of();
+//    }
 
     @Override
     public Optional<Client> getById(UUID id) {

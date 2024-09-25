@@ -9,6 +9,6 @@ import java.util.UUID;
 
 public interface ILaborRepository {
     Labor save (Labor labor, UUID id) throws SQLException;
-    List<Labor> getAll();
+  //  List<Labor> getAll();
     Optional<Labor> getById(UUID id);
 }

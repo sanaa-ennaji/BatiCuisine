@@ -30,22 +30,27 @@ public class projectService implements IProjectService {
 
 
 
-    @Override
     public Project create(String projectName, double surface, Optional<Client> client) {
         UUID projectId = UUID.randomUUID();
         Project project = new Project();
-        project.setId(UUID.randomUUID());
+        project.setId(projectId);
         project.setProjectName(projectName);
         project.setSurface(surface);
-        project.setClient(client);
+
+        if (client.isPresent()) {
+            project.setClient(client.get());
+        } else {
+            throw new IllegalArgumentException("Client cannot be null");
+        }
+
         project.setProfitMargin(0.0);
         project.setTotalCost(0.0);
         project.setProjectState(ProjectState.IN_PROGRESS);
 
         return project;
-
-
     }
+
+
 
     @Override
     public void save(Project project) throws SQLException {

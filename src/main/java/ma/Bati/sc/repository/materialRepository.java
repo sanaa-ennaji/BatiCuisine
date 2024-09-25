@@ -35,12 +35,12 @@ public class materialRepository implements IMaterialRepository {
         return material;
     }
 
-    @Override
-    public List<Material> getAll() {
-
-
-        return List.of();
-    }
+//    @Override
+//    public List<Material> getAll() {
+//
+//
+//        return List.of();
+//    }
 
     @Override
     public Optional<Material> getById(UUID id) {

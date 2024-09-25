@@ -27,6 +27,7 @@ public class ProjectUI {
         this.clientService = clientService;
         this.estimateService = estimateService;
     }
+
     public void createProject() {
         Optional<Client> client = getClient();
 
@@ -34,33 +35,38 @@ public class ProjectUI {
             System.out.println("Aucun client sélectionné. Abandon de la création du projet.");
             return;
         }
-        System.out.println("--- Creation d'un Nouveau Projet ---");
+
+        System.out.println("Client sélectionné : " + client.get().getId());
+        System.out.println("--- Création d'un Nouveau Projet ---");
         System.out.print("Entrez le nom du projet : ");
         String projectName = scanner.nextLine();
-
 
         System.out.print("Entrez la surface de la cuisine (en m²) : ");
         double surface = Double.parseDouble(scanner.nextLine());
 
-        System.out.print("Enter client ID: ");
-        UUID clientId = UUID.fromString(scanner.nextLine());
-        client = clientService.findById(clientId);
-
         Project project = projectService.create(projectName, surface, client);
+
+
         addMaterials(project);
         addLabor(project);
+
+
         double totalCost = calculateTotalCost(project);
+
+
         try {
             projectService.save(project);
-            System.out.println("project add  done ");
+            System.out.println("Projet ajouté avec succès.");
 
             EstimateUI estimateUI = new EstimateUI(estimateService);
             estimateUI.createEstimate(project, totalCost);
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("error saving the project ");
+            System.out.println("Erreur lors de l'enregistrement du projet.");
         }
     }
+
+
 
     private Optional<Client> getClient() {
 
@@ -80,7 +86,6 @@ public class ProjectUI {
             System.out.print("Entrez le nom du client : ");
             String clientName = scanner.nextLine();
 
-
             List<Client> clients = clientService.findByName(clientName);
 
             if (clients.isEmpty()) {
@@ -89,6 +94,7 @@ public class ProjectUI {
             } else {
                 Client foundClient = clients.get(0);
                 System.out.println("Client trouvé !");
+                System.out.println("id : " + foundClient.getId());
                 System.out.println("Nom : " + foundClient.getName());
                 System.out.println("Adresse : " + foundClient.getAddress());
                 System.out.println("Numéro de téléphone : " + foundClient.getPhone());
@@ -102,20 +108,16 @@ public class ProjectUI {
                 }
             }
         } else if (option == 2) {
-            clientUI.createClient();
-            System.out.print("Entrez l'ID du client que vous venez d'ajouter : ");
-            UUID clientId = UUID.fromString(scanner.nextLine());
-            client = clientService.findById(clientId);
-            if (client.isEmpty()) {
-                System.out.println("Client non trouvé après l'ajout.");
-                return Optional.empty();
-            }
-            return client;
+
+            Client newClient = clientUI.createClient();
+            return Optional.of(newClient);
         } else {
             System.out.println("Option invalide !");
             return Optional.empty();
         }
     }
+
+
 
 
 
@@ -218,11 +220,18 @@ public class ProjectUI {
     private void printCostBreakdown(Project project) {
         System.out.println("--- Résultat du Calcul ---");
         System.out.println("Nom du projet : " + project.getProjectName());
-        System.out.println("Client : " + project.getClient().map(Client::getName).orElse("Inconnu"));
-        System.out.println("Adresse du chantier : " + project.getClient().map(Client::getAddress).orElse("Adresse non fournie"));
-        System.out.println("Surface : " + project.getSurface() + " m²");
-        System.out.println("--- Détail des Coûts ---");
 
+        Client client = project.getClient();
+        if (client != null) {
+            System.out.println("Client : " + client.getName());
+            System.out.println("Adresse du chantier : " + client.getAddress());
+        } else {
+            System.out.println("Client : Inconnu");
+            System.out.println("Adresse du chantier : Adresse non fournie");
+        }
+
+        System.out.println("Surface : " + project.getSurface() + " m2");
+        System.out.println("--- Détail des Coûts ---");
         double totalMaterialCostBeforeVAT = 0;
         double totalMaterialCostWithVAT = 0;
         System.out.println("1. Matériaux :");
@@ -272,6 +281,7 @@ public class ProjectUI {
             System.out.println(project);
         }
     }
+
 
 
 

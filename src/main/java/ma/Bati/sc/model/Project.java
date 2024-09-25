@@ -14,7 +14,7 @@ public class Project {
     private double totalCost ;
     private ProjectState projectState ;
     private double surface ;
-    private Optional<Client> client ;
+    private Client client;
     List<Component> components ;
     List<Estimate> estimates ;
     private List<Material> materials;
@@ -32,7 +32,7 @@ public class Project {
        this.setTotalCost(totalCost);
        this.setProjectState(projectState);
        this.setSurface(surface);
-       this.setClient(Optional.ofNullable(client));
+       this.setClient(client);
         this.materials = new ArrayList<>();
         this.labors = new ArrayList<>();
 
@@ -55,7 +55,7 @@ public class Project {
     public ProjectState getProjectState(){
         return projectState;
     }
-   public Optional<Client> getClient (){
+   public Client getClient (){
         return client ;
    }
     public void setId (UUID id){
@@ -84,7 +84,7 @@ public class Project {
     public void setProjectName(String projectName) {
         this.projectName = projectName;
     }
-    public void setClient (Optional<Client> client){
+    public void setClient (Client client){
         this.client = client ;
     }
     public void setMaterials(List<Material> materials) {
@@ -109,6 +109,15 @@ public class Project {
         return  labors ;
     }
 
+    @Override
+    public String toString() {
+        return "Project ID: " + id +
+                ", Name: " + projectName +
+                ", Surface: " + surface + " m²" +
+                ", Client: " + (client != null ? client.getId() : "No client") +
+                ", Total Cost: " + totalCost +
+                ", State: " + projectState;
+    }
 
 
 }
