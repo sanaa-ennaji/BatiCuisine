@@ -101,7 +101,15 @@ public class projectService implements IProjectService {
     public List<Project> getAll() throws SQLException {
         return projectRepository.getAll();
     }
-
+  // mise en situation
+@Override
+public List<Project> getAll() throws SQLException {
+    List<Project> allProjects = projectRepository.getAll();
+    
+    return allProjects.stream()
+            .filter(project -> "completed".equalsIgnoreCase(project.getProjectState()))
+            .collect(Collectors.toList());
+}
 
 
 
